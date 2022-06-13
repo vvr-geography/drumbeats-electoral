@@ -13,6 +13,10 @@ function createMap() {
 
     const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
+        /*not working
+        params: {
+            countrycodes: 'us'
+        },*/
         style: 'bar',
         showMarker: true, // optional: true|false  - default true
         showPopup: false, // optional: true|false  - default false
@@ -24,14 +28,19 @@ function createMap() {
     });
     map.addControl(search);
 
-    map.on('geosearch/showlocation', createIcon)
+
+    //not working
+    function searchEventHandler(result) {
+        console.log(result.location);
+    }
+
+    //not working
+    map.on('geosearch/showlocation', searchEventHandler);
+
 
     getData();
 }
 
-function createIcon() {
-    L.marker().addTo(map)
-}
 
 
 
