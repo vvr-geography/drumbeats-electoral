@@ -1,6 +1,15 @@
 /*Add CSS styles here*/
-#map {    
-    height: 600px;    
-    width: 80%;
+#map {
+    height: 600px;
+    width: 48%;
     display: inline-block;
-    }
+}
+
+#sidepanel {
+    height: 600px;
+    width: 48%;
+    display: inline-block;
+    border-color:black;
+    border-width: 10px;
+    stroke: black;
+}
