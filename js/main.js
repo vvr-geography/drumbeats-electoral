@@ -92,17 +92,19 @@ function addToSidePanel (result){
 
     var feature = map.getLayerAt(mapwidth,mapheight).feature;
     
-    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<div id=drumbeatsImg>" + drumbeatsImg + "<p id='endorsedtext'>" + feature.properties.DRUMBeats + "</p></div>"
+    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p id='endorsedtext'>"  + drumbeatsImg + feature.properties.DRUMBeats + "</p></div>"
     document.getElementById("sidepanel").innerHTML = popupContent
       
 }
 
-//var drumbeatsImg = new Image()
-var drumbeatsImg = "<img src= 'https://images.squarespace-cdn.com/content/v1/609abba365e4de328b70577c/1620761752987-NHS5ATSQJDWVKZ6ZDFHK/Artboard%2B16.jpg' id='drumbeatsImg'>"
-console.log(drumbeatsImg)
+// variables for images on recommendations
+var drumbeatsImg = "<img src= 'https://images.squarespace-cdn.com/content/v1/609abba365e4de328b70577c/1620761752987-NHS5ATSQJDWVKZ6ZDFHK/Artboard%2B16.jpg' id='endorseImg'>"
+var DSAImg = "<img src= 'https://pbs.twimg.com/profile_images/1247315123653541888/syhiJRyd_400x400.png' id='endorseImg'>"
+var WFPImg = "<img src= 'https://pbs.twimg.com/profile_images/1313547246181453824/jqPnHO2d_400x400.png' id='endorseImg'>"
+
 
 function onEachShapefileFeature(feature, layer) {
-    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<div id=drumbeatsImg>" + drumbeatsImg + "<p id='endorsedtext'>" + feature.properties.DRUMBeats + "</p></div>"
+    var popupContent = "<h1 id='titletext'> Recommendations </h1>" + "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p id='endorsedtext'>" + drumbeatsImg + feature.properties.DRUMBeats + "</p>" + "<p id='endorsedtext'>" + DSAImg + feature.properties.DSA + "</p>" + "<p id='endorsedtext'>" + WFPImg + feature.properties.WFP + "</p>"
     layer.on({
         click: function populate() {
             document.getElementById("sidepanel").innerHTML = popupContent

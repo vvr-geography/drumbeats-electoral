@@ -1,26 +1,99 @@
 /*Add CSS styles here*/
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+/* Styles */
+
+
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+/* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
+/* Styles */
+
+
+}
+
+
+
+
+
+
+
+
 #map {
-    height: 600px;
-    width: 48%;
+    height: 50vh;
+    width: 600px;
     display: inline-block;
 }
 
 #sidepanel {
-    height: 600px;
-    width: 48%;
+    height: 50vh;
+    width: 600px;
     display: inline-block;
-    border-color:black;
-    border-width: 10px;
-    stroke: black;
+    margin-left: 2vw;
 }
 
-#drumbeatsImg {
-    height: 10vh;
-    width: 10vw;
+#titletext {
+    font-size: 3vh;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#AD {
+    font-size: 2vh;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+#endorseImg {
+    height: 8rem;
+    width: 8rem;
+    margin-right: 5rem;
     display:inline;
 }
 
 #endorsedtext {
-    font-size: large;
-    font-family: Verdana, Tahoma, sans-serif;
+    font-size:3vh;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+p #endorsedtext{
+    text-align: center;
 }
