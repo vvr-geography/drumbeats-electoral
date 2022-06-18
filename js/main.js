@@ -1,4 +1,4 @@
-// Add all scripts to the JS folder
+// find layer through point data code
 L.Map.include({
 
 	getLayerAtLatLng: function(latlng, lng) {
@@ -34,8 +34,6 @@ L.Map.include({
 		var id = L.stamp(el);
 		if (id in this._targets) {
 
-			/// TODO: Extra logic for canvas, maybe another call to getLayerAt
-
 			return this._targets[id];
 		}
 
@@ -44,6 +42,7 @@ L.Map.include({
 
 });
 
+//start leaflet code
 var map,
     geoJson;
 
@@ -79,57 +78,31 @@ function createMap() {
     map.addControl(search);
     map.on('geosearch/showlocation', addToSidePanel)
 
- 
-
-
     getData();
 }
+
+var mapwidth = document.getElementById('map').offsetWidth / 2 
+var mapheight = document.getElementById('map').offsetHeight / 2
+
+console.log(mapwidth)
+console.log(mapheight)
 
 function addToSidePanel (result){
     var point = map.project(result.marker._latlng);
 
-    var feature = map.getLayerAt(200,400).feature;
+    var feature = map.getLayerAt(mapwidth,mapheight).feature;
     
-    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p>" + drumbeatsImg + feature.properties.DRUMBeats + "</p>"
+    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<div id=drumbeatsImg>" + drumbeatsImg + "<p id='endorsedtext'>" + feature.properties.DRUMBeats + "</p></div>"
     document.getElementById("sidepanel").innerHTML = popupContent
       
 }
-
-
-/*
-function pollSitePointToLayer(feature, latlng){
-    var geojsonMarkerOptions = {
-        radius: 3,
-        fillColor: 'blue',
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-    };
-    var pollSiteLayer = L.circleMarker(latlng, geojsonMarkerOptions);
-
-    return pollSiteLayer
-
-}
-
-function getPollSiteData() {
-    fetch("data/polling-sites-nyc22.geojson")
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (json) {
-            L.geoJSON(json, {
-                pointToLayer: pollSitePointToLayer,
-            });
-        })
-} */
 
 //var drumbeatsImg = new Image()
 var drumbeatsImg = "<img src= 'https://images.squarespace-cdn.com/content/v1/609abba365e4de328b70577c/1620761752987-NHS5ATSQJDWVKZ6ZDFHK/Artboard%2B16.jpg' id='drumbeatsImg'>"
 console.log(drumbeatsImg)
 
 function onEachShapefileFeature(feature, layer) {
-    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p>" + drumbeatsImg + feature.properties.DRUMBeats + "</p>"
+    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<div id=drumbeatsImg>" + drumbeatsImg + "<p id='endorsedtext'>" + feature.properties.DRUMBeats + "</p></div>"
     layer.on({
         click: function populate() {
             document.getElementById("sidepanel").innerHTML = popupContent

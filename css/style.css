@@ -15,6 +15,12 @@
 }
 
 #drumbeatsImg {
-    height: 250px;
-    width: 250px;
+    height: 10vh;
+    width: 10vw;
+    display:inline;
+}
+
+#endorsedtext {
+    font-size: large;
+    font-family: Verdana, Tahoma, sans-serif;
 }
