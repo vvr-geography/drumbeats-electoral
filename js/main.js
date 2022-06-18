@@ -1,11 +1,51 @@
 // Add all scripts to the JS folder
-var map
+L.Map.include({
 
-var assemblyColor = {
-    "color": "#F09511",
-    "weight": 3,
-    "opacity": 0.4
-}
+	getLayerAtLatLng: function(latlng, lng) {
+		latlng = L.latLng(latlng, lng);
+
+		return this.layerAt(latLngToContainerPoint(latlng));
+	},
+
+	getLayerAt: function(point, y) {
+		point = L.point(point, y);
+
+		// Ignore points outside the map
+		if (!this.getSize().contains(point)) { return; }
+
+		var mapPos = this._container.getBoundingClientRect();
+
+		var viewportPoint = L.point(mapPos.left, mapPos.top).add(point);
+
+		var el = document.elementFromPoint(viewportPoint.x, viewportPoint.y);
+
+		return this._getLayerFromDOMElement(el);
+	},
+
+	_getLayerFromDOMElement: function(el) {
+		if ((!el) || el === this._container) {
+			// Stop the search when the map container itself is reached (meaning no
+			// layer at the requested point) or the container is undefined (the
+			// DOM elements were traversed up to the Document, meaning the map
+			// is invisible e.g. because CSS)
+			return;
+		}
+
+		var id = L.stamp(el);
+		if (id in this._targets) {
+
+			/// TODO: Extra logic for canvas, maybe another call to getLayerAt
+
+			return this._targets[id];
+		}
+
+		return this._getLayerFromDOMElement(el.parentElement);
+	}
+
+});
+
+var map,
+    geoJson;
 
 function createMap() {
 
@@ -16,29 +56,46 @@ function createMap() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-
     const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
         params: {
-            countrycodes: 'us'
+            'accept-language': 'en', // render results in English
+            countrycodes: 'US', // limit search results to Canada & United States'
+            viewbox: [-80,50,-70,40],
+            bounded: 1
         },
         style: 'bar',
         showMarker: true, // optional: true|false  - default true
-        showPopup: false, // optional: true|false  - default false
+        showPopup: true, // optional: true|false  - default false
         marker: {
             // optional: L.Marker    - default L.Icon.Default
             icon: new L.Icon.Default(),
             draggable: false,
-            interactive: false,
+           // interactive: false,
         },
-        autoClose: false,
-        // resultFormat: function(){document.getElementById("sidepanel").innerHTML = result.label}
+        autoClose: true,
+        keepResult: true,
     });
     map.addControl(search);
+    map.on('geosearch/showlocation', addToSidePanel)
+
+ 
+
 
     getData();
-    // getPollSiteData()
 }
+
+function addToSidePanel (result){
+    var point = map.project(result.marker._latlng);
+
+    var feature = map.getLayerAt(200,400).feature;
+    
+    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p>" + drumbeatsImg + feature.properties.DRUMBeats + "</p>"
+    document.getElementById("sidepanel").innerHTML = popupContent
+      
+}
+
+
 /*
 function pollSitePointToLayer(feature, latlng){
     var geojsonMarkerOptions = {
@@ -67,13 +124,18 @@ function getPollSiteData() {
         })
 } */
 
-function onEachShapefileFeature(feature,layer) {
-    var popupContent = "<p><b>Assembly District: </b> " + feature.properties.ID + feature.properties.DRUMBeats + "</p>"
+//var drumbeatsImg = new Image()
+var drumbeatsImg = "<img src= 'https://images.squarespace-cdn.com/content/v1/609abba365e4de328b70577c/1620761752987-NHS5ATSQJDWVKZ6ZDFHK/Artboard%2B16.jpg' id='drumbeatsImg'>"
+console.log(drumbeatsImg)
+
+function onEachShapefileFeature(feature, layer) {
+    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p>" + drumbeatsImg + feature.properties.DRUMBeats + "</p>"
     layer.on({
         click: function populate() {
             document.getElementById("sidepanel").innerHTML = popupContent
         }
     })
+    //layer._leaflet_id = feature.id;
 }
 
 function getData() {
@@ -82,9 +144,13 @@ function getData() {
             return response.json();
         })
         .then(function (json) {
-            L.geoJSON(json, {
+            var geoJson = L.geoJSON(json, {
                 style: function (feature) {
-                    return L.polyline(feature, assemblyColor)
+                    return {
+                        "color": "#000000",
+                        "weight": 3,
+                        "opacity": 0.4
+                    }
                 },
                 onEachFeature: onEachShapefileFeature
             }).addTo(map);

@@ -13,3 +13,8 @@
     border-width: 10px;
     stroke: black;
 }
+
+#drumbeatsImg {
+    height: 250px;
+    width: 250px;
+}
