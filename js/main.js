@@ -61,7 +61,6 @@ function createMap() {
             email: 'viggyram@gmail.com',
             'accept-language': 'en', // render results in English
             countrycodes: 'us', // limit search results to Canada & United States'
-            addressdetails: 1,
         },
         style: 'bar',
         showMarker: true, // optional: true|false  - default true
