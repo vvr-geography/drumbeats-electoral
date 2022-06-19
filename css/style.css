@@ -1,99 +1,215 @@
 /*Add CSS styles here*/
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 480px) {
-/* Styles */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 
+    /* Styles */
+    #map {
+        height: 50vh;
+        width: 100vw;
+        display: inline-block;
+    }
 
-}
+    #sidepanel {
+        height: 50vh;
+        width: 100vw;
+        display: inline-block;
+    }
 
-/* Smartphones (landscape) ----------- */
-@media only screen 
-and (min-width : 321px) {
-/* Styles */
-}
+    #titletext {
+        font-size: 2vh;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
 
-/* Smartphones (portrait) ----------- */
-@media only screen 
-and (max-width : 320px) {
-/* Styles */
-}
+    #AD {
+        font-size: 1.25vh;
+        font-family: Arial, Helvetica, sans-serif;
+    }
 
-/* iPads (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
-/* Styles */
+    #endorseImg {
+        height: 7rem;
+        width: 7rem;
+        margin-right: 3rem;
+        display: inline;
+    }
+
+    #endorsedtext {
+        font-size: 2vh;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .block {
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: #A50202;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        color: white;
+        font-weight: bolder;
+    }
+
 }
 
 /* iPads (landscape) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : landscape) {
-/* Styles */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+
+    /* Styles */
+    #map {
+        height: 50vh;
+        width: 48vw;
+        display: inline-block;
+    }
+
+    #sidepanel {
+        height: 50vh;
+        width: 48vw;
+        display: inline-block;
+        margin-left: 2vw;
+    }
+
+    #titletext {
+        font-size: 2.5vh;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    #AD {
+        font-size: 1.5vh;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #endorseImg {
+        height: 8rem;
+        width: 8rem;
+        margin-right: 5rem;
+        display: inline;
+    }
+
+    #endorsedtext {
+        font-size: 2.5vh;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .block {
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: #A50202;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        color: white;
+        font-weight: bolder;
+    }
+
 }
 
 /* iPads (portrait) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : portrait) {
-/* Styles */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+
+    /* Styles */
+    #map {
+        height: 50vh;
+        width: 100vw;
+        display: inline-block;
+    }
+
+    #sidepanel {
+        height: 50vh;
+        width: 100vw;
+        display: inline-block;
+    }
+
+    #titletext {
+        font-size: 2.5vh;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    #AD {
+        font-size: 1.5vh;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #endorseImg {
+        height: 8rem;
+        width: 8rem;
+        margin-right: 5rem;
+        display: inline;
+    }
+
+    #endorsedtext {
+        font-size: 2.5vh;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .block {
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: #A50202;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        color: white;
+        font-weight: bolder;
+    }
 }
 
 /* Desktops and laptops ----------- */
-@media only screen 
-and (min-width : 1224px) {
-/* Styles */
+@media only screen and (min-width : 1224px) {
+    /* Styles */
 
+    #map {
+        height: 50vh;
+        width: 48vw;
+        display: inline-block;
+    }
+
+    #sidepanel {
+        height: 50vh;
+        width: 48vw;
+        display: inline-block;
+        margin-left: 2vw;
+    }
+
+    #titletext {
+        font-size: 2.5vh;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    #AD {
+        font-size: 1.5vh;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #endorseImg {
+        height: 8rem;
+        width: 8rem;
+        margin-right: 5rem;
+        display: inline;
+    }
+
+    #endorsedtext {
+        font-size: 2.5vh;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .block {
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: #A50202;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        color: white;
+        font-weight: bolder;
+    }
 
 }
 
-
-
-
-
-
-
-
-#map {
-    height: 50vh;
-    width: 600px;
-    display: inline-block;
-}
-
-#sidepanel {
-    height: 50vh;
-    width: 600px;
-    display: inline-block;
-    margin-left: 2vw;
-}
-
-#titletext {
-    font-size: 3vh;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
-#AD {
-    font-size: 2vh;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-#endorseImg {
-    height: 8rem;
-    width: 8rem;
-    margin-right: 5rem;
-    display:inline;
-}
-
-#endorsedtext {
-    font-size:3vh;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
-p #endorsedtext{
-    text-align: center;
-}

@@ -1,44 +1,44 @@
 // find layer through point data code
 L.Map.include({
 
-	getLayerAtLatLng: function(latlng, lng) {
-		latlng = L.latLng(latlng, lng);
+    getLayerAtLatLng: function (latlng, lng) {
+        latlng = L.latLng(latlng, lng);
 
-		return this.layerAt(latLngToContainerPoint(latlng));
-	},
+        return this.layerAt(latLngToContainerPoint(latlng));
+    },
 
-	getLayerAt: function(point, y) {
-		point = L.point(point, y);
+    getLayerAt: function (point, y) {
+        point = L.point(point, y);
 
-		// Ignore points outside the map
-		if (!this.getSize().contains(point)) { return; }
+        // Ignore points outside the map
+        if (!this.getSize().contains(point)) { return; }
 
-		var mapPos = this._container.getBoundingClientRect();
+        var mapPos = this._container.getBoundingClientRect();
 
-		var viewportPoint = L.point(mapPos.left, mapPos.top).add(point);
+        var viewportPoint = L.point(mapPos.left, mapPos.top).add(point);
 
-		var el = document.elementFromPoint(viewportPoint.x, viewportPoint.y);
+        var el = document.elementFromPoint(viewportPoint.x, viewportPoint.y);
 
-		return this._getLayerFromDOMElement(el);
-	},
+        return this._getLayerFromDOMElement(el);
+    },
 
-	_getLayerFromDOMElement: function(el) {
-		if ((!el) || el === this._container) {
-			// Stop the search when the map container itself is reached (meaning no
-			// layer at the requested point) or the container is undefined (the
-			// DOM elements were traversed up to the Document, meaning the map
-			// is invisible e.g. because CSS)
-			return;
-		}
+    _getLayerFromDOMElement: function (el) {
+        if ((!el) || el === this._container) {
+            // Stop the search when the map container itself is reached (meaning no
+            // layer at the requested point) or the container is undefined (the
+            // DOM elements were traversed up to the Document, meaning the map
+            // is invisible e.g. because CSS)
+            return;
+        }
 
-		var id = L.stamp(el);
-		if (id in this._targets) {
+        var id = L.stamp(el);
+        if (id in this._targets) {
 
-			return this._targets[id];
-		}
+            return this._targets[id];
+        }
 
-		return this._getLayerFromDOMElement(el.parentElement);
-	}
+        return this._getLayerFromDOMElement(el.parentElement);
+    }
 
 });
 
@@ -48,7 +48,7 @@ var map,
 
 function createMap() {
 
-    map = L.map('map').setView([41, -74], 9);
+    map = L.map('map').setView([40.70, -74], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -58,10 +58,10 @@ function createMap() {
     const search = new GeoSearch.GeoSearchControl({
         provider: new GeoSearch.OpenStreetMapProvider(),
         params: {
+            email: 'viggyram@gmail.com',
             'accept-language': 'en', // render results in English
-            countrycodes: 'US', // limit search results to Canada & United States'
-            viewbox: [-80,50,-70,40],
-            bounded: 1
+            countrycodes: 'us', // limit search results to Canada & United States'
+            addressdetails: 1,
         },
         style: 'bar',
         showMarker: true, // optional: true|false  - default true
@@ -70,7 +70,7 @@ function createMap() {
             // optional: L.Marker    - default L.Icon.Default
             icon: new L.Icon.Default(),
             draggable: false,
-           // interactive: false,
+            // interactive: false,
         },
         autoClose: true,
         keepResult: true,
@@ -81,20 +81,19 @@ function createMap() {
     getData();
 }
 
-var mapwidth = document.getElementById('map').offsetWidth / 2 
+var mapwidth = document.getElementById('map').offsetWidth / 2
 var mapheight = document.getElementById('map').offsetHeight / 2
 
-console.log(mapwidth)
-console.log(mapheight)
-
-function addToSidePanel (result){
+function addToSidePanel(result) {
     var point = map.project(result.marker._latlng);
 
-    var feature = map.getLayerAt(mapwidth,mapheight).feature;
-    
-    var popupContent = "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p id='endorsedtext'>"  + drumbeatsImg + feature.properties.DRUMBeats + "</p></div>"
+    var feature = map.getLayerAt(mapwidth, mapheight).feature;
+
+    var buttonContent = "<form action='https://findmypollsite.vote.nyc/' method='get' target='_blank'>" + "<button type='submit' class='block'>Find your poll site here</button></form>"
+
+    var popupContent = "<h1 id='titletext'> NY State Assembly 2022 Recommendations </h1>" + "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p id='endorsedtext'>" + drumbeatsImg + feature.properties.DRUMBeats + "</p>" + "<p id='endorsedtext'>" + DSAImg + feature.properties.DSA + "</p>" + "<p id='endorsedtext'>" + WFPImg + feature.properties.WFP + "</p>" + buttonContent
     document.getElementById("sidepanel").innerHTML = popupContent
-      
+
 }
 
 // variables for images on recommendations
@@ -104,12 +103,39 @@ var WFPImg = "<img src= 'https://pbs.twimg.com/profile_images/131354724618145382
 
 
 function onEachShapefileFeature(feature, layer) {
-    var popupContent = "<h1 id='titletext'> Recommendations </h1>" + "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p id='endorsedtext'>" + drumbeatsImg + feature.properties.DRUMBeats + "</p>" + "<p id='endorsedtext'>" + DSAImg + feature.properties.DSA + "</p>" + "<p id='endorsedtext'>" + WFPImg + feature.properties.WFP + "</p>"
+    var buttonContent = "<form action='https://findmypollsite.vote.nyc/' method='get' target='_blank'>" + "<button type='submit' class='block'>Find your poll site here</button></form>"
+    var popupContent = "<h1 id='titletext'> NY State Assembly 2022 Recommendations </h1>" + "<p id='AD'><b>Assembly District: </b> " + feature.properties.ID + "</p>" + "<p id='endorsedtext'>" + drumbeatsImg + feature.properties.DRUMBeats + "</p>" + "<p id='endorsedtext'>" + DSAImg + feature.properties.DSA + "</p>" + "<p id='endorsedtext'>" + WFPImg + feature.properties.WFP + "</p>" + buttonContent
+
+    var hoverStyle = {
+        "color": "#A50202",
+        "weight": 5,
+        "opacity":1,
+        "fillOpacity":0.5,
+        "fillColor": "#A50202",
+    }
+
+    var regularStyle = {
+        "color": "#000000",
+        "weight": 1.5,
+        "opacity": 0.5,
+        "fillOpacity":0,
+        "fillColor": "#ffffff"
+    }
+
     layer.on({
         click: function populate() {
             document.getElementById("sidepanel").innerHTML = popupContent
+        },
+        mouseover: function(){
+            layer.setStyle(hoverStyle)
+        },
+        mouseout: function(){
+            layer.setStyle(regularStyle)
         }
     })
+
+
+
     //layer._leaflet_id = feature.id;
 }
 
@@ -123,8 +149,10 @@ function getData() {
                 style: function (feature) {
                     return {
                         "color": "#000000",
-                        "weight": 3,
-                        "opacity": 0.4
+                        "weight": 1.5,
+                        "opacity": 0.5,
+                        "fillOpacity":0,
+                        "fillColor": "#ffffff"
                     }
                 },
                 onEachFeature: onEachShapefileFeature
