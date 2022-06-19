@@ -59,8 +59,7 @@ function createMap() {
         provider: new GeoSearch.OpenStreetMapProvider(),
         params: {
             email: 'viggyram@gmail.com',
-            'accept-language': 'en', // render results in English
-            countrycodes: 'us', // limit search results to Canada & United States'
+            countrycodes:['us','ca'], // limit search results to Canada & United States'
         },
         style: 'bar',
         showMarker: true, // optional: true|false  - default true
@@ -108,8 +107,8 @@ function onEachShapefileFeature(feature, layer) {
     var hoverStyle = {
         "color": "#A50202",
         "weight": 5,
-        "opacity":1,
-        "fillOpacity":0.5,
+        "opacity": 1,
+        "fillOpacity": 0.5,
         "fillColor": "#A50202",
     }
 
@@ -117,7 +116,7 @@ function onEachShapefileFeature(feature, layer) {
         "color": "#000000",
         "weight": 1.5,
         "opacity": 0.5,
-        "fillOpacity":0,
+        "fillOpacity": 0,
         "fillColor": "#ffffff"
     }
 
@@ -125,10 +124,10 @@ function onEachShapefileFeature(feature, layer) {
         click: function populate() {
             document.getElementById("sidepanel").innerHTML = popupContent
         },
-        mouseover: function(){
+        mouseover: function () {
             layer.setStyle(hoverStyle)
         },
-        mouseout: function(){
+        mouseout: function () {
             layer.setStyle(regularStyle)
         }
     })
@@ -139,7 +138,7 @@ function onEachShapefileFeature(feature, layer) {
 }
 
 function getData() {
-    fetch('data/Assembly22.geojson')
+    fetch('https://raw.githubusercontent.com/vvr-geography/drumbeats-electoral/main/data/Assembly22.geojson')
         .then(function (response) {
             return response.json();
         })
@@ -150,7 +149,7 @@ function getData() {
                         "color": "#000000",
                         "weight": 1.5,
                         "opacity": 0.5,
-                        "fillOpacity":0,
+                        "fillOpacity": 0,
                         "fillColor": "#ffffff"
                     }
                 },
