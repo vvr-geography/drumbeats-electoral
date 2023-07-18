@@ -1,0 +1,1 @@
+This tool was designed for a 501c(4) organization to share their electoral recommendations with the public. It uses Leaflet and search by location to give recommendations to individuals based on the district their address is located in.
